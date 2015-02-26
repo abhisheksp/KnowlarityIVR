@@ -3,9 +3,7 @@ session_start();
 include('connect.php');
 try {
     $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-    //$sql = "SELECT * FROM doctors WHERE department_id= ".$_GET['department_choice'];
-
-     $docSql = "SELECT * FROM doctors WHERE department_id = ".$_GET['department_choice'];
+    $docSql = "SELECT * FROM doctors WHERE department_id = ".$_GET['department_choice'];
     $doctor_id = '';
     $i=1;
     $text='';
@@ -17,11 +15,8 @@ try {
             break;
         }  
             $i++;
-    }
-    //echo $doc_id;
-    
+    }  
     $csql = "SELECT * FROM `schedule` WHERE doctor_id=".$doctor_id ." AND flag =0 AND start > NOW() ORDER BY start ASC LIMIT 4";
-
      $start = '';
      $end= '';
      $newstr= '';
@@ -43,18 +38,13 @@ try {
         $newend = substr_replace($end, ' ', strlen($end)- 3, 0);
         $txt .=$dat." from ".$newstr." to ".$newend." press ".$p.'. ';
         $p++;
-
     }
-   
-
     echo $txt;
     //echo "Your appointment has been set on ".$dat." from ".$newstr." to ".$newend ;
-    
  }   
-catch(PDOException $e)
-    {
+catch(PDOException $e){
     echo $e->getMessage();
-    }
+}
 
 
 ?>

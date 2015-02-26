@@ -2,8 +2,6 @@
 include('connect.php');
 try {
     $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-    /*** echo a message saying we have connected ***/
-
     $sql = "SELECT id FROM users WHERE phone = ".$_GET['patient_phone'];
     $rows = $dbh->query($sql);
     $row = $rows->fetch();
@@ -18,10 +16,9 @@ try {
     $row = $rows->fetch();
     echo  $row[0]; 
 }
-catch(PDOException $e)
-    {
+catch(PDOException $e){
     echo $e->getMessage();
-    }
+}
 
 
 ?>
